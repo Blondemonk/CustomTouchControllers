@@ -3,7 +3,7 @@
 
 The Oculus Quest is a fantastic piece of technology, opening up a field of take-it-with-you virtual experiences with its high-quality display and solid hand/controller tracking. However, as part of my latest project ([Cover Drive Cricket](https://coverdrive.cricket)), I found that I wanted to customise the default controller models to provide a better onboarding experience - things like button highlighting, for example. Taking it to the extreme, how about the flexibility to do something like this?
 
-![Customised Oculus Touch controllers](../../Images/CustomTouch.png)
+![Customised Oculus Touch controllers](../../tree/main/Images/CustomTouch.png)
 
 Maybe a bit extreme for onboarding, but very, very customisable! Here's how I did it...
 
