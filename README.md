@@ -13,17 +13,24 @@ Maybe a bit extreme for onboarding, but very, very customisable! Here's how I di
 The base models that Oculus provides are part of the Oculus Integration package in Unity. If you're really interested, they can be found in `<ProjectName>/Oculus/VR/Meshes/OculusTouchForQuest2`, and the respective texures are in `<ProjectName>/Oculus/VR/Textures/OculusTouchForQuest2`. There should be two `.fbx` models, with respective `.png` files  (Left and Right) and a `Roughness.png` file too. They should look something like the images below.
 
 Left Controller:
+
 ![Controller albedo image - Left](https://raw.githubusercontent.com/Blondemonk/CustomTouchControllers/main/Textures/OculusTouchForQuest2_Left_Orig.png)
+
 Right controller:
+
 ![Controller albedo image - Right](https://raw.githubusercontent.com/Blondemonk/CustomTouchControllers/main/Textures/OculusTouchForQuest2_Right_Orig.png)
+
 Roughness:
+
 ![Controller roughness image](https://raw.githubusercontent.com/Blondemonk/CustomTouchControllers/main/Textures/OculusTouchForQuest2_Roughness_Orig.png)
 
 ## Trial and Error
 The idea here is to try and identify which parts of these images (specifically the left and right controllers - I'll leave roughness alone from this point on) map to which parts of the controller. Some parts are obvious - you can spot the Oculus logo immediately, and there are some interesting shapes and patterns to investigate. I've got to admit though, my approach was less than sophisticated and included simply colouring in areas of the images and checking Unity's re-rendered models to see if I'd hit a button or not!
 
 After a little while, I ended up with the below:
+
 Left Controller:
+
 ![Controller button masks - Left](https://raw.githubusercontent.com/Blondemonk/CustomTouchControllers/main/Images/OculusTouchForQuest2_Left.png)
 [The right controller is the same, but with X/Y replaced with A/B]
 
