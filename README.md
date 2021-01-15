@@ -3,7 +3,7 @@
 
 The Oculus Quest is a fantastic piece of technology, opening up a field of take-it-with-you virtual experiences with its high-quality display and solid hand/controller tracking. However, as part of my latest project ([Cover Drive Cricket](https://coverdrive.cricket)), I found that I wanted to customise the default controller models to provide a better onboarding experience - things like button highlighting, for example. Taking it to the extreme, how about the flexibility to do something like this?
 
-![Customised Oculus Touch controllers](../../OculusTouchForQuest2/CustomTouch.png)
+![Customised Oculus Touch controllers](../../Images/CustomTouch.png)
 
 Maybe a bit extreme for onboarding, but very, very customisable! Here's how I did it...
 
@@ -13,18 +13,18 @@ Maybe a bit extreme for onboarding, but very, very customisable! Here's how I di
 The base models that Oculus provides are part of the Oculus Integration package in Unity. If you're really interested, they can be found in `<ProjectName>/Oculus/VR/Meshes/OculusTouchForQuest2`, and the respective texures are in `<ProjectName>/Oculus/VR/Textures/OculusTouchForQuest2`. There should be two `.fbx` models, with respective `.png` files  (Left and Right) and a `Roughness.png` file too. They should look something like the images below.
 
 Left Controller:
-![Controller albedo image - Left](../../OculusTouchForQuest2/OculusTouchForQuest2_Left_Orig.png)
+![Controller albedo image - Left](../../Textures/OculusTouchForQuest2_Left_Orig.png)
 Right controller:
-![Controller albedo image - Right](../../OculusTouchForQuest2/OculusTouchForQuest2_Right_Orig.png)
+![Controller albedo image - Right](../../Textures/OculusTouchForQuest2_Right_Orig.png)
 Roughness:
-![Controller roughness image](../../OculusTouchForQuest2/OculusTouchForQuest2_Roughness.png)
+![Controller roughness image](../../Textures/OculusTouchForQuest2_Roughness.png)
 
 ## Trial and Error
 The idea here is to try and identify which parts of these images (specifically the left and right controllers - I'll leave roughness alone from this point on) map to which parts of the controller. Some parts are obvious - you can spot the Oculus logo immediately, and there are some interesting shapes and patterns to investigate. I've got to admit though, my approach was less than sophisticated and included simply colouring in areas of the images and checking Unity's re-rendered models to see if I'd hit a button or not!
 
 After a little while, I ended up with the below:
 Left Controller:
-![Controller button masks - Left](../../OculusTouchForQuest2/OculusTouchForQuest2_Left.png)
+![Controller button masks - Left](../../Images/OculusTouchForQuest2_Left.png)
 [The right controller is the same, but with X/Y replaced with A/B]
 
 The blue areas represent the primary trigger; the green areas are for the secondary trigger, and the red is the toggle. Why are there two areas? The smaller area represents the visible trigger/toggle, where as the larger area is generally for the sides/bottom of the triggers/toggle.
@@ -36,17 +36,17 @@ I'm always up for learning more, so please reach out to me if there's a better w
 
 Y button
 
-![Mask for the Y button](../../OculusTouchForQuest2/Y_Mask.png#thumbnail)
-![Mask for the text on the Y button](../../OculusTouchForQuest2/Y_Text.png#thumbnail)
+![Mask for the Y button](../../Masks/Y_Mask.png#thumbnail)
+![Mask for the text on the Y button](../../Masks/Y_Text.png#thumbnail)
 
 Settings button
 
-![Mask for the Settings button](../OculusTouchForQuest2/Settings_Mask.png#thumbnail)
-![Mask for the text on the Settings button](../../OculusTouchForQuest2/Settings_Text.png#thumbnail)
+![Mask for the Settings button](../Masks/Settings_Mask.png#thumbnail)
+![Mask for the text on the Settings button](../../Masks/Settings_Text.png#thumbnail)
 
 Thumbrest
 
-![Mask for the Thumbrest](../../OculusTouchForQuest2/Thumbrest_Mask.png#thumbnail)
+![Mask for the Thumbrest](../../Masks/Thumbrest_Mask.png#thumbnail)
 
 etc...
 
@@ -57,7 +57,7 @@ Loosely, what we want to do is to be able to define a colour for each button/tri
 
 For bonus points, let's also add boolean switches to enable/disable emission for each button/trigger/toggle in our shader too!
 
-[SimpleMaskedColourShader.shader](../../OculusTouchForQuest2/SimpleMaskedColourShader.shader)
+[SimpleMaskedColourShader.shader](../../Materials/SimpleMaskedColourShader.shader)
 ```
 Shader "Custom/SimpleMaskedColourShader"
 {
@@ -233,16 +233,27 @@ To use this shader, you need to follow a few steps:
 - Create new `OculusTouchForQuest2_Left.mat` and `OculusTouchForQuest2_Right.mat` files.
 - Drag the `SimpleMaskedColourShader.shader` file onto each material.
 - Drag the correct mask images into their respective slots on each shader.
+
+![Setting the mask images in the shader](../OculusTouchForQuest2/SettingMasks.PNG)
+
 - Copy/move the Oculus `/fbx` models under your `OVRCameraRig` object (under the correct controller anchors).
+
+![Putting the controllers in the right place](../OculusTouchForQuest2/Anchors.PNG)
+
 - Expand the models, select the mesh, and change the mesh material to use our new `OculusTouchForQuest2_Left.mat` or `OculusTouchForQuest2_Right.mat` material.
 
+![Setting the mesh materials](../OculusTouchForQuest2/Meshes.PNG)
+
 Let's see how that's worked out:
-![Test video of our custom controller shader](../../OculusTouchForQuest2/Video.mp4)
+
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/9czztcSyk4Y" frameborder="0" allowfullscreen="true" height="400px" width="600px"> </iframe>
+</figure>
 
 ## [Bonus] Script-activation
 No that we've got our custom controller shader, what happens if we want to be able to change styles at run-time? Let's write some simple scripts to enable us to edit this on the fly.
 
-[CustomControllerSystem.cs](../../OculusTouchForQuest2/CustomControllerSystem.cs)
+[CustomControllerSystem.cs](../../Code/CustomControllerSystem.cs)
 ```
 using System.Collections;
 using System.Collections.Generic;
